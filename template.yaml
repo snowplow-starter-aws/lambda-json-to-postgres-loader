@@ -1,0 +1,27 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  lambda-json-to-postgres-loader
+
+  Sample SAM Template for lambda-json-to-postgres-loader
+
+# More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
+Globals:
+  Function:
+    Timeout: 3
+
+Resources:
+  SnowplowJsonToPostgresFunction:
+    Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
+    Properties:
+      CodeUri: snowplow-json-to-postgres-loader/
+      Handler: app.lambda_handler
+      Runtime: python3.7
+
+Outputs:
+  # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
+  # Find out more about other implicit resources you can reference within SAM
+  # https://github.com/awslabs/serverless-application-model/blob/master/docs/internals/generated_resources.rst#api
+  SnowplowJsonToPostgresFunction:
+    Description: "Hello World Lambda Function ARN"
+    Value: !GetAtt JsonToPostgresLoaderFunction.Arn

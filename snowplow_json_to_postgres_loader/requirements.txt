@@ -1,0 +1,4 @@
+requests
+aws-psycopg2
+boto3
+pytest
