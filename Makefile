@@ -1,8 +1,6 @@
 export PYTHONUNBUFFERED := 1
 PYTHON=python3.7
 
-.DEFAULT_GOAL := dev.build
-
 .PHONY: virtualenv
 virtualenv:
 	$PYTHON -m pip  install virtualenv
