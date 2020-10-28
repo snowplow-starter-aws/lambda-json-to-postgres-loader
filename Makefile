@@ -28,6 +28,13 @@ install: .venv
        pip install -r snowplow_json_to_postgres_loader/requirements.txt; \
     )
 
+test: .venv
+	( \
+       . .venv/bin/activate; \
+       AWS_PROFILE=homepage-production pytest; \
+    )
+
+
 .PHONY: run
 run:
 	AWS_PROFILE=homepage-production sam local invoke SnowplowJsonToPostgresFunction -e events/event.json

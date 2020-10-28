@@ -1,21 +1,13 @@
-import json
-
+import os
+import sys
 import pytest
 from testcontainers.postgres import PostgresContainer
-import psycopg2
+from .database_helper import migrate
+from .database_helper import migrated_testcontainer
 
-from snowplow_json_to_postgres_loader import postgres_loader
+sys.path.append(os.path.join(os.path.dirname(__file__), os.pardir, "snowplow_json_to_postgres_loader"))
 
-
-@pytest.fixture()
-def database_container():
-    with PostgresContainer("postgres:9.5") as postgres:
-        print(postgres.get_connection_url())
-        conn = psycopg2.connect(
-            f"host='{postgres.get_container_host_ip()}' port='{postgres.get_exposed_port(5432)}' user='{postgres.POSTGRES_USER}' password='{postgres.POSTGRES_PASSWORD}'")
-        cur = conn.cursor()
-        cur.execute('select 1;')
-        conn.commit()
+from postgres_loader import *
 
 
 @pytest.fixture()
@@ -125,5 +117,11 @@ def single_event():
 #     postgres_loader.Event(single_event)
 
 
-def test_testcontainer(database_container):
-    print(1)
+def test_testcontainer(single_event):
+    with migrated_testcontainer() as dsn:
+        loader = PostgresLoader(dsn)
+        i = loader.insert_event(single_event)
+
+#
+# def test_list():
+#     get_migration_files()

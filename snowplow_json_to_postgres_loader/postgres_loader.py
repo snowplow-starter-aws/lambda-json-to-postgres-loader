@@ -1,6 +1,5 @@
 import logging
 import re
-
 import psycopg2
 
 logger = logging.getLogger()
@@ -119,24 +118,14 @@ class Event:
 
 class PostgresLoader:
 
-    def __init__(self):
-        self.conn = psycopg2.connect("dbname='snowplow' host='172.17.0.1' user='postgres' password='postgres'")
+    def __init__(self, data_source_name):
+        self.conn = psycopg2.connect(data_source_name)
 
     def insert_event(self, event):
         e = Event(event)
-
         insert_stmts = e.insert_stmts()
-
-
         cur = self.conn.cursor()
-        #
-        # simple_fields = list(filter(is_not_context_field, event.keys()))
-        # values = ",".join(simple_fields)
-        # assignments = ",".join([to_string(event[key]) for key in simple_fields])
-        # insert = f'insert into atomic.events({values}) values({assignments})'
         for insert_stmt in insert_stmts:
-            print(insert_stmt)
+            logger.debug(insert_stmt)
             cur.execute(insert_stmt)
         self.conn.commit()
-
-        return insert_stmts
