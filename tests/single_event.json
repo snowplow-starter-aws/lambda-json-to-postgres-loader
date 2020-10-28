@@ -1,27 +1,27 @@
 {
   "app_id": "homepage",
   "platform": "web",
-  "etl_tstamp": "2020-10-27T16:50:47.000Z",
-  "collector_tstamp": "2020-10-27T16:50:42.806Z",
-  "dvce_created_tstamp": "2020-10-27T16:50:42.686Z",
+  "etl_tstamp": "2020-10-28T08:53:27.342Z",
+  "collector_tstamp": "2020-10-28T08:53:18.486Z",
+  "dvce_created_tstamp": "2020-10-28T08:53:17.972Z",
   "event": "page_view",
-  "event_id": "08ade0a5-2b97-40d5-ae82-0cde93694790",
+  "event_id": "85743aea-e33d-46dc-a5d5-f0dbf4b44738",
   "name_tracker": "snowplow",
   "v_tracker": "js-2.16.2",
   "v_collector": "ssc-1.0.1-kinesis",
   "v_etl": "stream-enrich-1.1.3-common-1.1.3",
   "user_ipaddress": "172.17.0.1",
-  "domain_userid": "f7af14d6-df15-4721-b5e8-a99de86dce84",
+  "domain_userid": "1e417ab1-9d4a-4ba1-8571-b6c71c9b0768",
   "domain_sessionidx": 1,
-  "network_userid": "ff27c2bc-3436-4c94-8738-829b67d12cf8",
-  "page_url": "http://localhost:8000/cross-account-multi-region-ci-cd-pipeline-on-aws",
+  "network_userid": "018939c9-884a-495d-a6ed-ef0c9738cbca",
+  "page_url": "http://localhost:8000/",
   "page_urlscheme": "http",
   "page_urlhost": "localhost",
   "page_urlport": 8000,
-  "page_urlpath": "/cross-account-multi-region-ci-cd-pipeline-on-aws",
-  "contexts_com_snowplowanalytics_snowplow_web_page_1": [
+  "page_urlpath": "/",
+  "contexts__com_snowplowanalytics_snowplow__web_page__1": [
     {
-      "id": "a62e7007-0054-4c9b-98bc-1d7820da71ca"
+      "id": "18be4980-e224-4873-abee-23cb4a61e2cb"
     }
   ],
   "useragent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36",
@@ -44,9 +44,9 @@
   "dvce_screenheight": 1080,
   "doc_charset": "UTF-8",
   "doc_width": 1513,
-  "doc_height": 3841,
-  "dvce_sent_tstamp": "2020-10-27T16:50:42.715Z",
-  "contexts_com_snowplowanalytics_snowplow_ua_parser_context_1": [
+  "doc_height": 2340,
+  "dvce_sent_tstamp": "2020-10-28T08:53:18.145Z",
+  "contexts__com_snowplowanalytics_snowplow__ua_parser_context__1": [
     {
       "useragentFamily": "Chrome",
       "useragentMajor": "86",
@@ -62,10 +62,11 @@
       "deviceFamily": "Other"
     }
   ],
-  "domain_sessionid": "d8116ac3-9280-4253-a272-473f6e16348b",
-  "derived_tstamp": "2020-10-27T16:50:42.777Z",
+  "domain_sessionid": "80334838-d33c-447a-943e-bd32f276a1d0",
+  "derived_tstamp": "2020-10-28T08:53:18.313Z",
   "event_vendor": "com.snowplowanalytics.snowplow",
   "event_name": "page_view",
   "event_format": "jsonschema",
-  "event_version": "1-0-0"
+  "event_version": "1-0-0",
+  "event_fingerprint": "ac2b4ec9095e87a1b3e8cbe03ef824a3"
 }

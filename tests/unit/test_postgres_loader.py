@@ -30,7 +30,7 @@ def single_event():
         "page_urlhost": "localhost",
         "page_urlport": 8000,
         "page_urlpath": "/cross-account-multi-region-ci-cd-pipeline-on-aws",
-        "contexts_com_snowplowanalytics_snowplow_web_page_1": [
+        "contexts__com_snowplowanalytics_snowplow__web_page__1": [
             {
                 "id": "a62e7007-0054-4c9b-98bc-1d7820da71ca"
             }
@@ -57,7 +57,7 @@ def single_event():
         "doc_width": 1513,
         "doc_height": 3841,
         "dvce_sent_tstamp": "2020-10-27T16:50:42.715Z",
-        "contexts_com_snowplowanalytics_snowplow_ua_parser_context_1": [
+        "contexts__com_snowplowanalytics_snowplow__ua_parser_context__1": [
             {
                 "useragentFamily": "Chrome",
                 "useragentMajor": "86",
@@ -83,14 +83,29 @@ def single_event():
 
 
 def test_postgres_loader(single_event):
-
     loader = postgres_loader.PostgresLoader()
-    print(single_event)
     i = loader.insert_event(single_event)
-    print(i)
-    # data = json.loads(ret["body"])
-    #
-    # assert ret["statusCode"] == 200
-    # assert "message" in ret["body"]
-    # assert data["message"] == "hello world"
+
     # assert "location" in data.dict_keys()
+
+#
+# def test_ua_parser_context(single_event):
+#     print(single_event)
+#     name = 'contexts__com_snowplowanalytics_snowplow__ua_parser_context__1'
+#     context = postgres_loader.Context.create(name=name, objs=single_event[name], event_id='234', collector_tstamp='4563')
+#
+#     print(context)
+#     print(context.insert_stmts())
+#
+# def test_web_page(single_event):
+#     print(single_event)
+#     name = 'contexts__com_snowplowanalytics_snowplow__web_page__1'
+#     context = postgres_loader.Context.create(name=name, objs=single_event[name], event_id='234', collector_tstamp='4563')
+#
+#     print(context)
+#     print(context.insert_stmts())
+#
+#
+# def test_process_event(single_event):
+#     print(single_event)
+#     postgres_loader.Event(single_event)
