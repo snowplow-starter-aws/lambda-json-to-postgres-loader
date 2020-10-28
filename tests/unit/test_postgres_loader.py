@@ -1,8 +1,21 @@
 import json
 
 import pytest
+from testcontainers.postgres import PostgresContainer
+import psycopg2
 
 from snowplow_json_to_postgres_loader import postgres_loader
+
+
+@pytest.fixture()
+def database_container():
+    with PostgresContainer("postgres:9.5") as postgres:
+        print(postgres.get_connection_url())
+        conn = psycopg2.connect(
+            f"host='{postgres.get_container_host_ip()}' port='{postgres.get_exposed_port(5432)}' user='{postgres.POSTGRES_USER}' password='{postgres.POSTGRES_PASSWORD}'")
+        cur = conn.cursor()
+        cur.execute('select 1;')
+        conn.commit()
 
 
 @pytest.fixture()
@@ -82,11 +95,12 @@ def single_event():
     }
 
 
-def test_postgres_loader(single_event):
-    loader = postgres_loader.PostgresLoader()
-    i = loader.insert_event(single_event)
+# def test_postgres_loader(single_event):
+#     loader = postgres_loader.PostgresLoader()
+#     i = loader.insert_event(single_event)
 
-    # assert "location" in data.dict_keys()
+# assert "location" in data.dict_keys()
+
 
 #
 # def test_ua_parser_context(single_event):
@@ -109,3 +123,7 @@ def test_postgres_loader(single_event):
 # def test_process_event(single_event):
 #     print(single_event)
 #     postgres_loader.Event(single_event)
+
+
+def test_testcontainer(database_container):
+    print(1)

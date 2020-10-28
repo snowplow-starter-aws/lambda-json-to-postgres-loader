@@ -15,6 +15,13 @@ virtualenv:
 activate: .venv
 	. .venv/bin/activate
 
+dev: .venv
+	( \
+       . .venv/bin/activate; \
+       pip install -r snowplow_json_to_postgres_loader/requirements.dev.txt; \
+    )
+
+
 install: .venv
 	( \
        . .venv/bin/activate; \
