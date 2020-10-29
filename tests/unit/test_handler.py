@@ -44,7 +44,7 @@ def s3_event():
                         "arn": "arn:aws:s3:::petersiemen-snowplow-tracking"
                     },
                     "object": {
-                        "key": "2020/10/28/08/good-stream-enriched-converted-2-2020-10-28-08-52-28-6719202e-ec7a-406d-8042-ef1865268e99",
+                        "key": "good-stream-enriched/2020/10/29/12/good-stream-enriched-1-2020-10-29-12-50-54-783113ce-7d41-4e42-bb52-ae34d87a9d01",
                         "size": 1024,
                         "eTag": "0123456789abcdef0123456789abcdef",
                         "sequencer": "0A1B2C3D4E5F678901"
@@ -58,5 +58,5 @@ def s3_event():
 def test_lambda_handler(s3_event):
     with migrated_testcontainer() as dsn:
         ret = app.lambda_handler(s3_event, "")
-        print(ret)
+
         assert ret["statusCode"] == 200

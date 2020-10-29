@@ -24,11 +24,13 @@ def migrate(conn):
 @contextmanager
 def migrated_testcontainer():
     with PostgresContainer("postgres:13.0") as postgres:
+        os.environ["DATABASE"] = 'test'
         os.environ["HOST"] = postgres.get_container_host_ip()
         os.environ["PORT"] = postgres.get_exposed_port(5432)
         os.environ["USERNAME"] = postgres.POSTGRES_USER
         os.environ["PASSWORD"] = postgres.POSTGRES_PASSWORD
-        dsn = f"host='{postgres.get_container_host_ip()}' port='{postgres.get_exposed_port(5432)}' user='{postgres.POSTGRES_USER}' password='{postgres.POSTGRES_PASSWORD}'"
+        dsn = f"dbname='test' host='{postgres.get_container_host_ip()}' port='{postgres.get_exposed_port(5432)}' user='{postgres.POSTGRES_USER}' password='{postgres.POSTGRES_PASSWORD}'"
         conn = psycopg2.connect(dsn)
+
         migrate(conn)
         yield dsn
