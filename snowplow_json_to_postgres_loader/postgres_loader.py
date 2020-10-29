@@ -91,8 +91,6 @@ class Event:
     def __init__(self, event):
         self.event = event
         self.context_fields, self.simple_fields = partition(is_context_field, list(event.keys()))
-        print(self.simple_fields)
-        print(self.context_fields)
 
     def insert_stmts(self):
 
@@ -124,8 +122,9 @@ class PostgresLoader:
     def insert_event(self, event):
         e = Event(event)
         insert_stmts = e.insert_stmts()
-        cur = self.conn.cursor()
-        for insert_stmt in insert_stmts:
-            logger.debug(insert_stmt)
-            cur.execute(insert_stmt)
-        self.conn.commit()
+
+        with self.conn:
+            with self.conn.cursor() as cursor:
+                for insert_stmt in insert_stmts:
+                    logger.info(insert_stmt)
+                    cursor.execute(insert_stmt)

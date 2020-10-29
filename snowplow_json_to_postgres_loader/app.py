@@ -35,7 +35,7 @@ def lambda_handler(event, context):
             success += 1
         except Exception as ex:
             logger.error(f'exception during processing of {line}')
-            logging.exception("Fatal error during insert")
+            # logging.exception("Fatal error during insert")
             failure += 1
 
     status_code = 500

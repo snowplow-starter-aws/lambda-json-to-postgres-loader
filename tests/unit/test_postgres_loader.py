@@ -11,6 +11,77 @@ from postgres_loader import *
 
 
 @pytest.fixture()
+def another_event():
+    return {
+        "app_id": "homepage",
+        "platform": "web",
+        "etl_tstamp": "2020-10-29T15:42:33.856Z",
+        "collector_tstamp": "2020-10-29T15:42:24.696Z",
+        "dvce_created_tstamp": "2020-10-29T15:42:24.659Z",
+        "event": "page_view",
+        "event_id": "af48862e-8e27-4a3d-aa7a-5be71a46e181",
+        "name_tracker": "snowplow",
+        "v_tracker": "js-2.16.2",
+        "v_collector": "ssc-1.0.1-kinesis",
+        "v_etl": "stream-enrich-1.1.3-common-1.1.3",
+        "user_ipaddress": "91.65.137.70",
+        "domain_userid": "becb6cfb-4681-4480-a7cb-d8e001ae53ae",
+        "domain_sessionidx": 5,
+        "network_userid": "00000000-0000-4000-a000-000000000000",
+        "page_url": "https://www.petersiemen.net/availability-and-durability-for-plants",
+        "page_urlscheme": "https",
+        "page_urlhost": "www.petersiemen.net",
+        "page_urlport": 443,
+        "page_urlpath": "/availability-and-durability-for-plants",
+        "contexts__com_snowplowanalytics_snowplow__web_page__1": [{"id": "acf326ac-460e-43b5-91a8-3bfd982861e4"}],
+        "useragent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/86.0.4240.111 Safari/537.36",
+        "br_lang": "en-US",
+        "br_features_pdf": True,
+        "br_features_flash": False,
+        "br_features_java": False,
+        "br_features_director": False,
+        "br_features_quicktime": False,
+        "br_features_realplayer": False,
+        "br_features_windowsmedia": False,
+        "br_features_gears": False,
+        "br_features_silverlight": False,
+        "br_cookies": True,
+        "br_colordepth": "24",
+        "br_viewwidth": 1528,
+        "br_viewheight": 490,
+        "os_timezone": "Europe/Berlin",
+        "dvce_screenwidth": 1920,
+        "dvce_screenheight": 1080, "doc_charset": "UTF-8",
+        "doc_width": 1513,
+        "doc_height": 3152,
+        "dvce_sent_tstamp": "2020-10-29T15:42:24.664Z",
+        "contexts__com_snowplowanalytics_snowplow__ua_parser_context__1": [
+            {"useragentFamily": "Chrome",
+             "useragentMajor": "86",
+             "useragentMinor": "0",
+             "useragentPatch": "4240",
+             "useragentVersion": "Chrome 86.0.4240",
+             "osFamily": "Linux",
+             "osMajor": None,
+             "osMinor": None,
+             "osPatch": None,
+             "osPatchMinor": None,
+             "osVersion": "Linux",
+             "deviceFamily": "Other"}],
+        "contexts__org_ietf__http_cookie__1": [
+            {"name": "sp",
+             "value": "00000000-0000-4000-A000-000000000000"}
+        ],
+        "domain_sessionid": "5d2b9d35-2754-42c6-bacb-adc681d7b792",
+        "derived_tstamp": "2020-10-29T15:42:24.691Z",
+        "event_vendor": "com.snowplowanalytics.snowplow",
+        "event_name": "page_view",
+        "event_format": "jsonschema",
+        "event_version": "1-0-0",
+        "event_fingerprint": "9bc42207de47c08bd05e8691c7abf8cc"}
+
+
+@pytest.fixture()
 def single_event():
     """ Generates API GW Event"""
 
@@ -117,11 +188,16 @@ def single_event():
 #     postgres_loader.Event(single_event)
 
 
-def test_testcontainer(single_event):
+# def test_testcontainer(single_event):
+#     with migrated_testcontainer() as dsn:
+#         loader = PostgresLoader(dsn)
+#         i = loader.insert_event(single_event)
+
+
+def test_insert_another(another_event):
     with migrated_testcontainer() as dsn:
         loader = PostgresLoader(dsn)
-        i = loader.insert_event(single_event)
+        i = loader.insert_event(another_event)
 
-#
 # def test_list():
 #     get_migration_files()
