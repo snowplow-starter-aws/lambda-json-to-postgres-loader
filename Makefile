@@ -43,5 +43,5 @@ build.image:
 
 .PHONY: package
 package: build.image
-	AWS_PROFILE=homepage-production sam package --s3-bucket petersiemen-lambda-artifacts \
+	AWS_PROFILE=homepage-production sam package --s3-bucket petersiemen-snowplow-lambda-artifacts \
  		--s3-prefix snowplow-json-to-postgres-loader --output-template-file output-template.yaml
