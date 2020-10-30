@@ -17,9 +17,10 @@ def with_temp_file():
 
 
 def read_json_file(bucket, key):
-    file = tempfile.NamedTemporaryFile()
-    with open(file.name, 'wb') as f:
+    #  the file is deleted on close
+    with tempfile.NamedTemporaryFile(mode='wb') as f:
         s3.download_fileobj(bucket, key, f)
-    with open(file.name) as f:
-        lines = f.readlines()
+        f.flush()
+        with open(f.name) as r:
+            lines = r.readlines()
     return lines
